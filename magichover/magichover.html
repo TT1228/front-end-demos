@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="magichover.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+  <h1>bilibili</h1>
+  <form >
+    <input class="ue" placeholder="enter your account">
+    <input class="ue" placeholder="password">
+    <input type="submit" value="submit" class="sub" >
+  </form>
+</div>
+
+<script type="text/javascript">
+  const con = document.querySelector('.container');
+  let isIn = true;
+  let isOut = false;
+  var span;
+  con.addEventListener('mouseenter',(e)=>{
+    if(isIn){
+      let inx = e.clientX-e.target.offsetLeft;
+      let iny = e.clientY-e.target.offsetTop;
+
+      let el = document.createElement('span');
+      el.style.left = inx+'px';
+      el.style.top = iny+'px';
+      con.appendChild(el);
+      span = document.querySelector('.container span');
+      span.classList.remove('out');
+      span.classList.add('in');
+      isIn = false;
+      isOut = true;
+    }
+  })
+  con.addEventListener('mouseleave',(e)=>{
+    if(isOut){
+      let inx = e.clientX-e.target.offsetLeft;
+      let iny = e.clientY-e.target.offsetTop;
+
+      span.style.left = inx+'px';
+      span.style.top = iny+'px';
+      span.classList.remove('in');
+      span.classList.add('out');
+      isIn = true;
+      isOut = false;
+      setTimeout(()=>{
+        con.removeChild(span);
+        console.log('span removed');
+      },500);
+    }
+  })
+</script>
+
+
+</body>
+</html>
