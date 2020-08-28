@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Adaptivescroll.css">
+    <script src="https://cdn.staticfile.org/vue/2.5.7/vue.js"></script>
+    <title>Adaptivescroll</title>
+<div class="container">
+    <div class="wrapper">
+        <div class="section" id="section1">section1</div>
+        <div class="section" id="section2">section2</div>
+        <div class="section" id="section3">section3</div>
+        <div class="section" id="section4">section4</div>
+        <div class="section" id="section5">section5</div>
+    </div>
+    <nav>
+        <a href="#section1" class="current">section1</a>
+        <a href="#section2">section2</a>
+        <a href="#section3">section3</a>
+        <a href="#section4">section4</a>
+        <a href="#section5">section5</a>
+    </nav>
+</div>
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js">
+
+</script>
+<script type="text/javascript">
+  var $navs = $('nav a'),                    
+      $sections = $('.section'),             
+      $window = $(window),
+      navLength = $navs.length - 1;
+
+  $navs.on('click',function(e){
+    e.preventDefault();
+    $('html,body').animate({
+      'scrollTop':$($(this).attr('href')).offset().top
+    },400);
+  })
+  $window.on('scroll', function() {
+      var scrollTop = $window.scrollTop(),
+          len = navLength;
+
+      for (; len > -1; len--) {
+          var that = $sections.eq(len);
+          if (scrollTop >= that.offset().top) {
+               $navs.removeClass('current').eq(len).addClass('current');
+               break;
+          }
+      }
+  });
+</script>
